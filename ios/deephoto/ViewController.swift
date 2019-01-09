@@ -45,26 +45,33 @@ import ARKit
         magicSwitch.setOn(false, animated: false)
     
         // Hook up status view controller callback(s).
-          statusViewController.restartExperienceHandler = { [unowned self] in
+        statusViewController.restartExperienceHandler = { [unowned self] in
             self.restartExperience()
         }
-      
-        UIApplication.shared.isIdleTimerDisabled = true
       
         // Add REACT NATIVE root view.
         let rnView = (UIApplication.shared.delegate as! AppDelegate).rootView
         rnView?.frame = appView.bounds
         appView.addSubview(rnView!)
+      
+        UIApplication.shared.isIdleTimerDisabled = true
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Prevent the screen from being dimmed to avoid interuppting the AR experience.
-        
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+      
         // Start the AR experience
         resetTracking()
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        // Prevent the screen from being dimmed to avoid interuppting the AR experience.
+//        
+//        // Start the AR experience
+//        resetTracking()
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -132,10 +139,10 @@ import ARKit
 }
 
 extension ViewController {
-  @objc func setNewMappingWith(picture:String, andVideo:String) -> Void {
-    let uuid = UUID.init().description
-    
-    self.imageMaps[uuid] = URL(fileURLWithPath: picture);
-    self.videoMaps[uuid] = URL(fileURLWithPath: andVideo);
-  }
+    @objc func setNewMappingWith(picture:String, andVideo:String) -> Void {
+        let uuid = UUID.init().description
+      
+        self.imageMaps[uuid] = URL(fileURLWithPath: picture);
+        self.videoMaps[uuid] = URL(fileURLWithPath: andVideo);
+    }
 }
