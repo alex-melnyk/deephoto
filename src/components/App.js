@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {NativeModules, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
-const {ARViewManager} = NativeModules;
+import {ARViewManager} from '../bridge';
 
 class App extends Component {
     actionPressed = () => {
@@ -31,7 +31,8 @@ class App extends Component {
                 }, (videoResponse) => {
                     if (!videoResponse.didCancel && !videoResponse.error) {
                         const videoPath = videoResponse.uri.replace('file://', '');
-                        ARViewManager.setARMapping(imagePath, videoPath);
+
+                        ARViewManager.addARMapping(imagePath, videoPath);
                     }
                 });
             }

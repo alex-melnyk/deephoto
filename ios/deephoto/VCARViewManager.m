@@ -5,7 +5,7 @@
 
 @implementation VCARViewManager
 
-RCT_EXPORT_MODULE(ARViewManager);
+RCT_EXPORT_MODULE(RNARViewManager);
 
 + (ViewController *)sharedInstance
 {
@@ -19,10 +19,10 @@ RCT_EXPORT_MODULE(ARViewManager);
   return instance;
 }
 
-RCT_EXPORT_METHOD(setARMapping:(NSString *)picture video:(NSString*)video)
+RCT_EXPORT_METHOD(addARMapping:(NSString *)picturePath video:(NSString*)videoPath)
 {
   ViewController *instance = [VCARViewManager sharedInstance];
-  [instance setNewMappingWithPicture:picture andVideo:video];
+  [instance setNewMappingWithPicture:picturePath andVideo:videoPath];
 }
 
 @end
